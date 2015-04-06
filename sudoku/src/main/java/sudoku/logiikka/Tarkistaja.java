@@ -2,71 +2,78 @@ package sudoku.logiikka;
 
 public class Tarkistaja {
 
-    public static boolean tarkistaOikeellisuus(int[][] kentta) {
-
-        return sarakkeetOikein(kentta) && rivitOikein(kentta) && ruudutOikein(kentta);
-    }
-
-    private static boolean sarakkeetOikein(int[][] kentta) {
-        for (int x = 0; x < kentta[0].length; x++) {
-            if (kaikkiNumerotSarakkeessa(kentta, x)) {
-                return false;
-            }
+    public static boolean tarkistaOikeellisuus(Kentta kentta) {
+        if (eiNollia(kentta)) {
+            return sarakkeetOikein(kentta) && rivitOikein(kentta) && ruudutOikein(kentta);
         }
-        return true;
+        return false;
     }
 
-    private static boolean rivitOikein(int[][] kentta) {
-        for (int y = 0; y < kentta.length; y++) {
-            if (!kaikkiNumerotVaakarivilla(kentta[y])) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private static boolean ruudutOikein(int[][] kentta) {
-        for (int y = 0; y < kentta.length; y++) {
-            if (y % 3 == 0) {
-                for (int x = 0; x < kentta[0].length; x++) {
-                    if (x % 3 == 0) {
-                        if (!kaikkiNumerotRuudukossa(kentta, y, x)) {
-                            return false;
-                        }
-                    }
+    private static boolean eiNollia(Kentta kentta) {
+        for (int y = 0; y < kentta.getKoko(); y++) {
+            for (int x = 0; x < kentta.getKoko(); x++) {
+                if (kentta.getArvo(y, x) == 0) {
+                    return false;
                 }
             }
         }
         return true;
     }
 
-    private static boolean kaikkiNumerotSarakkeessa(int[][] kentta, int x) {
-        boolean[] tarkistus = new boolean[kentta.length];
+    private static boolean sarakkeetOikein(Kentta kentta) {
+        for (int x = 0; x < kentta.getKoko(); x++) {
+            if (!kaikkiNumerotSarakkeessa(kentta, x)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-        for (int y = 0; y < kentta.length; y++) {
-            tarkistus[y] = true;
+    private static boolean rivitOikein(Kentta kentta) {
+        for (int y = 0; y < kentta.getKoko(); y++) {
+            if (!kaikkiNumerotVaakarivilla(kentta, y)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean ruudutOikein(Kentta kentta) {
+        for (int y = 0; y < kentta.getKoko(); y += 3) {
+            for (int x = 0; x < kentta.getKoko(); x += 3) {
+                if (!kaikkiNumerotRuudukossa(kentta, y, x)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private static boolean kaikkiNumerotSarakkeessa(Kentta kentta, int x) {
+        boolean[] tarkistus = new boolean[kentta.getKoko()];
+
+        for (int y = 0; y < kentta.getKoko(); y++) {
+            tarkistus[kentta.getArvo(y, x) - 1] = true;
         }
 
         return sisaltaaKaikkiNumerot(tarkistus);
     }
 
-    public static boolean kaikkiNumerotVaakarivilla(int[] kentta) {
-
-        boolean[] tarkistus = new boolean[kentta.length];
-
-        for (int x = 0; x < kentta.length; x++) {
-            tarkistus[kentta[x] - 1] = true;
+    public static boolean kaikkiNumerotVaakarivilla(Kentta kentta, int y) {
+        boolean[] tarkistus = new boolean[kentta.getKoko()];
+        for (int x = 0; x < kentta.getKoko(); x++) {
+            tarkistus[kentta.getArvo(y, x) - 1] = true;
         }
 
         return sisaltaaKaikkiNumerot(tarkistus);
     }
 
-    public static boolean kaikkiNumerotRuudukossa(int[][] kentta, int startY, int startX) {
-        boolean[] tarkistus = new boolean[kentta.length];
+    public static boolean kaikkiNumerotRuudukossa(Kentta kentta, int startY, int startX) {
+        boolean[] tarkistus = new boolean[kentta.getKoko()];
 
         for (int y = startY; y < startY + 3; y++) {
             for (int x = startX; x < startX + 3; x++) {
-                tarkistus[kentta[y][x] - 1] = true;
+                tarkistus[kentta.getArvo(y, x) - 1] = true;
             }
         }
         return sisaltaaKaikkiNumerot(tarkistus);
@@ -74,23 +81,24 @@ public class Tarkistaja {
 
     private static boolean sisaltaaKaikkiNumerot(boolean[] tarkistus) {
         for (int x = 0; x < tarkistus.length; x++) {
-            if (tarkistus[x] == false) {
+            if (!tarkistus[x]) {
                 return false;
             }
         }
         return true;
     }
 
-    public static boolean validoi(int[][] kentta) {
-        if (!oikeatNumerot(kentta)){
+    public static boolean validoi(Kentta kentta) {
+        if (!oikeatNumerot(kentta)) {
             return false;
         }
         return (riveillaEiDuplikaatteja(kentta));
     }
 
-    public static boolean oikeatNumerot(int[][] kentta) {
-        for (int[] rivi : kentta) {
-            for (int arvo : rivi) {
+    public static boolean oikeatNumerot(Kentta kentta) {
+        for (int y = 0; y < kentta.getKoko(); y++) {
+            for (int x = 0; x < kentta.getKoko(); x++) {
+                int arvo = kentta.getArvo(y, x);
                 if (arvo < 0 || arvo > 9) {
                     return false;
                 }
@@ -99,11 +107,14 @@ public class Tarkistaja {
         return true;
     }
 
-    public static boolean riveillaEiDuplikaatteja(int[][] kentta) {
-        for (int y = 0; y < kentta[0].length; y++) {
-            int[] tarkistus = new int[kentta.length];
-            for (int x = 0; x < kentta.length; x++) {
-                if (++tarkistus[kentta[y][x] - 1] > 1) {
+    public static boolean riveillaEiDuplikaatteja(Kentta kentta) {
+        for (int y = 0; y < kentta.getKoko(); y++) {
+            int[] tarkistus = new int[kentta.getKoko()];
+            for (int x = 0; x < kentta.getKoko(); x++) {
+                if (kentta.getArvo(y, x) < 1) {
+                    continue;
+                }
+                if (++tarkistus[kentta.getArvo(y, x) - 1] > 1) {
                     return false;
                 }
             }

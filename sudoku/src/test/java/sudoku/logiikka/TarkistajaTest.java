@@ -23,6 +23,9 @@ public class TarkistajaTest {
     private int[][] eiToimivaKentta2;
     private int[][] eiToimivaKentta3;
     private int[][] eiToimivaKentta4;
+    private int[][] eiToimivaKentta5;
+    private int[][] eiToimivaKentta6;
+    private Kentta kentta = new Kentta();
 
     public TarkistajaTest() {
     }
@@ -91,6 +94,31 @@ public class TarkistajaTest {
             {3, 4, 5, 6, 7, 8, 9, 1, 2},
             {6, 7, 8, 9, 1, 2, 3, 4, 5},
             {9, 1, 2, 3, 4, 5, 6, 7, 8}};
+
+        eiToimivaKentta5 = new int[][]{
+            {1, 2, 3, 4, 5, 6, 7, 8, 9},
+            {4, 5, 6, 7, 8, 9, 1, 2, 3},
+            {7, 8, 9, 1, 2, 3, 4, 5, 6},
+            {2, 3, 4, 5, 6, 0, 8, 9, 1},
+            {5, 6, 7, 8, 9, 1, 2, 3, 4},
+            {8, 9, 1, 2, 3, 4, 5, 6, 7},
+            {3, 4, 5, 6, 7, 8, 9, 1, 2},
+            {6, 7, 8, 9, 1, 2, 3, 4, 5},
+            {9, 1, 2, 3, 4, 5, 6, 7, 8}};
+
+        eiToimivaKentta6 = new int[][]{
+            {0, 2, 3, 4, 5, 6, 7, 8, 9},
+            {4, 5, 6, 7, 8, 9, 1, 2, 3},
+            {7, 8, 9, 1, 2, 3, 4, 5, 6},
+            {2, 3, 4, 5, 6, 7, 8, 9, 1},
+            {5, 6, 7, 8, 0, 1, 2, 3, 4},
+            {8, 9, 1, 2, 3, 4, 5, 6, 7},
+            {3, 4, 5, 6, 7, 8, 9, 1, 2},
+            {6, 7, 8, 9, 1, 2, 3, 4, 5},
+            {9, 1, 2, 3, 4, 5, 6, 7, 8}};
+
+        Kentta kentta = new Kentta();
+
     }
 
     @After
@@ -99,53 +127,62 @@ public class TarkistajaTest {
 
     @Test
     public void KaikkiNumerotVaakarivillaPalauttaaTrue() {
-        assertEquals(Tarkistaja.kaikkiNumerotVaakarivilla(toimivaKentta[0]), true);
+        kentta.setKentta(toimivaKentta);
+        assertEquals(Tarkistaja.kaikkiNumerotVaakarivilla(kentta, 0), true);
     }
 
     @Test
     public void KaikkiNumerotVaakarivillaPalauttaafalse() {
-        assertEquals(Tarkistaja.kaikkiNumerotVaakarivilla(eiToimivaKentta[0]), false);
+        kentta.setKentta(eiToimivaKentta);
+        assertEquals(Tarkistaja.kaikkiNumerotVaakarivilla(kentta, 0), false);
     }
 
     @Test
     public void KaikkiNumerotVaakarivillaPalauttaaFalseJosDuplikaatteja() {
-
-        assertEquals(Tarkistaja.kaikkiNumerotVaakarivilla(eiToimivaKentta[0]), false);
+        kentta.setKentta(eiToimivaKentta);
+        assertEquals(Tarkistaja.kaikkiNumerotVaakarivilla(kentta, 0), false);
     }
 
     @Test
     public void riveillaEiDuplikaattejaPalauttaaTrue() {
-        assertEquals(Tarkistaja.riveillaEiDuplikaatteja(toimivaKentta), true);
+        kentta.setKentta(toimivaKentta);
+        assertEquals(Tarkistaja.riveillaEiDuplikaatteja(kentta), true);
     }
 
     @Test
     public void riveillaEiDuplikaattejaPalauttaaFalse() {
-        assertEquals(Tarkistaja.riveillaEiDuplikaatteja(eiToimivaKentta), false);
+        kentta.setKentta(eiToimivaKentta);
+        assertEquals(Tarkistaja.riveillaEiDuplikaatteja(kentta), false);
     }
 
     @Test
     public void kaikkiNumerotRuudukossaPalauttaaTrue() {
-        assertEquals(Tarkistaja.kaikkiNumerotRuudukossa(toimivaKentta, 0, 0), true);
+        kentta.setKentta(toimivaKentta);
+        assertEquals(Tarkistaja.kaikkiNumerotRuudukossa(kentta, 0, 0), true);
     }
 
     @Test
     public void kaikkiNumerotRuudukossaPalauttaaFalse() {
-        assertEquals(Tarkistaja.kaikkiNumerotRuudukossa(eiToimivaKentta, 0, 0), false);
+        kentta.setKentta(eiToimivaKentta);
+        assertEquals(Tarkistaja.kaikkiNumerotRuudukossa(kentta, 0, 0), false);
     }
 
     @Test
     public void oikeatNumerotPalauttaaFalseKunNegatiivisiaArvoja() {
-        assertEquals(Tarkistaja.oikeatNumerot(eiToimivaKentta3), false);
+        kentta.setKentta(eiToimivaKentta3);
+        assertEquals(Tarkistaja.oikeatNumerot(kentta), false);
     }
 
     @Test
     public void oikeatNumerotPalauttaaTrue() {
-        assertEquals(Tarkistaja.oikeatNumerot(toimivaKentta), true);
+        kentta.setKentta(toimivaKentta);
+        assertEquals(Tarkistaja.oikeatNumerot(kentta), true);
     }
 
     @Test
     public void oikeatNumerotPalauttaaFalseKunLiianSuuriaArvoja() {
-        assertEquals(Tarkistaja.oikeatNumerot(eiToimivaKentta4), false);
+        kentta.setKentta(eiToimivaKentta4);
+        assertEquals(Tarkistaja.oikeatNumerot(kentta), false);
     }
     
    

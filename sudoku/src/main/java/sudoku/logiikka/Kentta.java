@@ -8,9 +8,9 @@ public class Kentta {
     private int koko;
 
     public boolean setKentta(int[][] kentta) {
-        if (Tarkistaja.validoi(kentta)) {
-            this.kentta = kentta;
-            this.koko = kentta.length;
+        this.kentta = kentta;
+        this.koko = kentta[0].length;
+        if (Tarkistaja.validoi(this)) {
             return true;
         }
         return false;
@@ -22,6 +22,10 @@ public class Kentta {
 
     public int getKoko() {
         return koko;
+    }
+
+    void setArvo(int y, int x, int arvo) {
+        kentta[y][x] = arvo;
     }
 
 }
