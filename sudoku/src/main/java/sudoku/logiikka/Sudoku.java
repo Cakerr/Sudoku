@@ -40,8 +40,12 @@ public class Sudoku {
     public void uusiKentta() {
         int[][] uusi = new int[9][9];
         kentta.setKentta(uusi);
-        
         ui.paivita();
+        
+    }
+
+    public boolean tarkistaUusiKentta() {
+        return Tarkistaja.validoi(kentta);
     }
 
 }

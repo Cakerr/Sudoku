@@ -92,7 +92,7 @@ public class Tarkistaja {
         if (!oikeatNumerot(kentta)) {
             return false;
         }
-        return (riveillaEiDuplikaatteja(kentta));
+        return (riveillaEiDuplikaatteja(kentta) && sarakkeissaEiDuplikaatteja(kentta) && ruuduissaEiDuplikaatteja(kentta));
     }
 
     public static boolean oikeatNumerot(Kentta kentta) {
@@ -123,10 +123,39 @@ public class Tarkistaja {
     }
 
     private static boolean sarakkeissaEiDuplikaatteja(Kentta kentta) {
+        for (int x = 0; x < kentta.getKoko(); x++) {
+            int[] tarkistus = new int[kentta.getKoko()];
+            for (int y = 0; y < kentta.getKoko(); y++) {
+                if (kentta.getArvo(y, x) < 1) {
+                    continue;
+                }
+                if (++tarkistus[kentta.getArvo(y, x) - 1] > 1) {
+                    return false;
+                }
+            }
+        }
         return true;
+
     }
 
     private static boolean ruuduissaEiDuplikaatteja(Kentta kentta) {
+
+        for (int y = 0; y < kentta.getKoko(); y += 3) {
+            for (int x = 0; x < kentta.getKoko(); x += 3) {
+                int[] tarkistus = new int[kentta.getKoko()];
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        if (kentta.getArvo(i, j) < 1) {
+                            continue;
+                        }
+                        if (++tarkistus[kentta.getArvo(i, j) - 1] > 1) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+
         return true;
     }
 

@@ -17,6 +17,7 @@ import javax.swing.JTextField;
 import sudoku.logiikka.Sudoku;
 import sudoku.ui.listenerit.Tarkistusnappi;
 import sudoku.ui.listenerit.UusiKenttaPainike;
+import sudoku.ui.listenerit.Valmisnappi;
 
 /**
  *
@@ -28,12 +29,12 @@ public class Gui extends JFrame implements Ui {
     private JPanel tausta;
     private JLabel aika;
     private JMenuItem ratkaise;
-    private JButton syotaSudoku;
+   
     private JButton kentta[][];
     private JPanel ruudukko[][];
     private JMenuBar menubar;
     private JMenu menu, uusi;
-    private JMenuItem tarkista, generoi, syota;
+    private JMenuItem tarkista, generoi, syota, valmisPainike;
 
     public Gui(Sudoku sudoku) {
         this.sudoku = sudoku;
@@ -118,6 +119,7 @@ public class Gui extends JFrame implements Ui {
     
     public void uusiKentta(){
         sudoku.uusiKentta();
+        valmisPainike();
     }
 
     @Override
@@ -134,4 +136,16 @@ public class Gui extends JFrame implements Ui {
             }
         }
     }
+
+    private void valmisPainike() {
+        valmisPainike = new Valmisnappi(this);
+        menubar.add(valmisPainike);
+    }
+
+    public boolean paivitaKentta() {
+        return sudoku.tarkistaUusiKentta();
+        
+    }
+
+  
 }

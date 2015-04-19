@@ -18,7 +18,8 @@ import org.junit.Test;
  */
 public class TarkistajaTest {
 
-    private int[][] toimivaKentta;
+    private int[][] toimivaKentta, validointiOnnistuu, validointiEiOnnistu, validointiEiOnnistu2,
+            validointiEiOnnistu3, validointiOnnistuu2, validointiOnnistuu3;
     private int[][] eiToimivaKentta;
     private int[][] eiToimivaKentta2;
     private int[][] eiToimivaKentta3;
@@ -116,6 +117,74 @@ public class TarkistajaTest {
             {3, 4, 5, 6, 7, 8, 9, 1, 2},
             {6, 7, 8, 9, 1, 2, 3, 4, 5},
             {9, 1, 2, 3, 4, 5, 6, 7, 8}};
+        
+        validointiEiOnnistu = new int[][]{
+            {0, 1, 1, 4, 5, 6, 7, 8, 9},
+            {4, 5, 6, 7, 8, 9, 1, 2, 3},
+            {7, 8, 9, 1, 2, 3, 4, 5, 6},
+            {2, 3, 4, 5, 6, 7, 8, 9, 1},
+            {5, 6, 7, 8, 0, 1, 2, 3, 4},
+            {8, 9, 1, 2, 3, 4, 5, 6, 7},
+            {3, 4, 5, 6, 7, 8, 9, 1, 2},
+            {6, 7, 8, 9, 1, 2, 3, 4, 5},
+            {9, 1, 2, 3, 4, 5, 6, 7, 8}};
+        
+        validointiEiOnnistu2 = new int[][]{
+            {0, 1, 3, 4, 5, 6, 7, 8, 9},
+            {4, 5, 6, 7, 8, 9, 1, 2, 3},
+            {7, 8, 9, 1, 2, 3, 4, 5, 6},
+            {2, 3, 4, 5, 6, 7, 8, 9, 1},
+            {5, 6, 7, 8, 0, 1, 2, 3, 4},
+            {8, 9, 1, 2, 3, 4, 5, 6, 7},
+            {3, 4, 5, 6, 7, 8, 9, 1, 2},
+            {6, 7, 8, 9, 1, 2, 3, 4, 5},
+            {9, 1, 2, 3, 4, 5, 6, 7, 8}};
+        
+        validointiEiOnnistu3 = new int[][]{
+            {1, 2, 3, 4, 5, 6, 7, 8, 9},
+            {4, 5, 6, 7, 8, 9, 1, 2, 3},
+            {2, 8, 9, 1, 0, 3, 4, 5, 6},
+            {0, 3, 4, 5, 6, 7, 8, 9, 1},
+            {5, 6, 7, 8, 0, 1, 2, 3, 4},
+            {8, 9, 1, 2, 3, 4, 5, 6, 7},
+            {3, 4, 5, 6, 7, 8, 9, 1, 2},
+            {6, 7, 8, 9, 1, 2, 3, 4, 5},
+            {9, 1, 2, 3, 4, 5, 6, 7, 8}};
+        
+        
+        validointiOnnistuu = new int[][]{
+            {0, 0, 3, 4, 5, 6, 7, 8, 9},
+            {4, 5, 6, 7, 8, 9, 1, 2, 3},
+            {7, 8, 9, 1, 2, 3, 4, 5, 6},
+            {2, 3, 4, 5, 6, 7, 8, 9, 1},
+            {5, 6, 7, 8, 9, 1, 2, 3, 4},
+            {8, 9, 1, 2, 3, 4, 5, 6, 7},
+            {3, 4, 5, 6, 7, 8, 9, 1, 2},
+            {6, 7, 8, 9, 1, 2, 3, 4, 5},
+            {9, 1, 2, 3, 4, 5, 6, 7, 8}};
+        
+        validointiOnnistuu2 = new int[][]{
+            {0, 0, 3, 4, 5, 6, 7, 8, 9},
+            {4, 5, 6, 7, 8, 9, 1, 2, 3},
+            {7, 8, 9, 1, 2, 3, 4, 5, 6},
+            {2, 3, 4, 5, 6, 7, 8, 9, 1},
+            {5, 6, 7, 8, 9, 1, 2, 3, 4},
+            {8, 9, 1, 2, 3, 4, 5, 6, 7},
+            {3, 4, 5, 6, 7, 8, 9, 1, 2},
+            {6, 7, 8, 9, 1, 2, 3, 4, 5},
+            {0, 1, 2, 3, 4, 5, 6, 7, 8}};
+        
+        validointiOnnistuu3 = new int[][]{
+            {0, 2, 3, 4, 5, 6, 7, 8, 9},
+            {4, 5, 6, 7, 8, 9, 1, 2, 3},
+            {7, 0, 9, 1, 2, 3, 4, 5, 6},
+            {2, 3, 4, 5, 6, 7, 8, 9, 1},
+            {5, 6, 7, 8, 9, 1, 2, 3, 4},
+            {8, 9, 1, 2, 3, 4, 5, 6, 7},
+            {3, 4, 5, 6, 7, 8, 9, 1, 2},
+            {6, 7, 8, 9, 1, 2, 3, 4, 5},
+            {9, 1, 2, 3, 4, 5, 6, 7, 8}};
+
 
         Kentta kentta = new Kentta();
 
@@ -185,6 +254,64 @@ public class TarkistajaTest {
         assertEquals(Tarkistaja.oikeatNumerot(kentta), false);
     }
     
-   
+    @Test
+    public void validointiEiOnnistuKunRivillä2samaaNumeroa(){
+        assertEquals(kentta.setKentta(validointiEiOnnistu), false);
+    }
+    
+    @Test
+    public void validointiEiOnnistuKunSarakkeessa2samaaNumeroa(){
+        assertEquals(kentta.setKentta(validointiEiOnnistu2), false);
+    }
+    
+    @Test
+    public void validointiEiOnnistuKunRuudussa2samaaNumeroa(){
+        assertEquals(kentta.setKentta(validointiEiOnnistu3), false);
+    }
+    
+    @Test
+    public void validointiOnnistuKunRivillä2Nollaa(){
+        assertEquals(kentta.setKentta(validointiOnnistuu), true);
+    }
+    
+     @Test
+    public void validointiOnnistuKunSarakkeessa2Nollaa(){
+        assertEquals(kentta.setKentta(validointiOnnistuu2), true);
+    }
+    
+    @Test
+    public void validointiOnnistuKunRuudussa2Nollaa(){
+        assertEquals(kentta.setKentta(validointiOnnistuu3), true);
+    }
+    
+    @Test
+    public void eiNolliaPalauttaaFalseKunNollia(){
+        kentta.setKentta(validointiOnnistuu);
+        assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), false);
+    }
+    
+    @Test
+    public void tarkistaOikeellisuusPalauttaaTrueKunOikeinTäytettyKentta(){
+        kentta.setKentta(toimivaKentta);
+        assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), true);
+    }
+    
+    @Test
+    public void tarkistaOikeellisuusPalauttaaFalseKunRivillaDuplikaatteja(){
+        kentta.setKentta(eiToimivaKentta);
+        assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), false);
+    }
+    
+     @Test
+    public void tarkistaOikeellisuusPalauttaaFalseKunSarakkeessaDuplikaatteja(){
+        kentta.setKentta(eiToimivaKentta2);
+        assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), false);
+    }
+    
+     @Test
+    public void tarkistaOikeellisuusPalauttaaFalseKunRuudussaDuplikaatteja(){
+        kentta.setKentta(eiToimivaKentta2);
+        assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), false);
+    }
 
 }
