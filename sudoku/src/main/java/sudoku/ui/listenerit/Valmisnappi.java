@@ -9,9 +9,17 @@ import javax.swing.JOptionPane;
 import sudoku.ui.Gui;
 import sudoku.ui.Ui;
 
+/**
+ *
+ * @author ari
+ */
 public class Valmisnappi extends JMenuItem{
     private Gui ui;
 
+    /**
+     *
+     * @param ui
+     */
     public Valmisnappi(Gui ui) {
         super("Valmis"); 
         this.ui = ui;

@@ -36,6 +36,10 @@ public class Gui extends JFrame implements Ui {
     private JMenu menu, uusi;
     private JMenuItem tarkista, generoi, syota, valmisPainike;
 
+    /**
+     *
+     * @param sudoku
+     */
     public Gui(Sudoku sudoku) {
         this.sudoku = sudoku;
 
@@ -113,20 +117,36 @@ public class Gui extends JFrame implements Ui {
 
     }
 
+    /**
+     *
+     * @param y
+     * @param x
+     * @param arvo
+     */
     public void setArvo(int y, int x, int arvo) {
         sudoku.setArvo(y, x, arvo);
     }
     
+    /**
+     *
+     */
     public void uusiKentta(){
         sudoku.uusiKentta();
         valmisPainike();
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public boolean tarkista() {
         return sudoku.tarkista();
     }
 
+    /**
+     *
+     */
     @Override
     public void paivita() {
         for (int i = 0; i < kentta.length; i++) {
@@ -142,6 +162,10 @@ public class Gui extends JFrame implements Ui {
         menubar.add(valmisPainike);
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean paivitaKentta() {
         return sudoku.tarkistaUusiKentta();
         

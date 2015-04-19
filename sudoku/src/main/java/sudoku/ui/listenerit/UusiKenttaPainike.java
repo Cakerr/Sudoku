@@ -8,9 +8,17 @@ import javax.swing.JOptionPane;
 import sudoku.ui.Gui;
 import sudoku.ui.Ui;
 
+/**
+ *
+ * @author ari
+ */
 public class UusiKenttaPainike extends JMenuItem{
     private Gui ui;
 
+    /**
+     *
+     * @param ui
+     */
     public UusiKenttaPainike(Gui ui) {
         super("Luo uusi sudoku");
         this.ui = ui;

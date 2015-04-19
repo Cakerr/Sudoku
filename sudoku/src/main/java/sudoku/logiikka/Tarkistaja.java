@@ -1,7 +1,17 @@
 package sudoku.logiikka;
 
+/**
+ * Luokka tarjoaa sudokulaudan tarkistamiseen ja validoimiseen tarvittavat
+ * julkiset metodit.
+ * @author ari
+ */
 public class Tarkistaja {
 
+    /**
+     *Tarkistaa täytetyn sudokun.
+     * @param kentta tarkistettava kentta
+     * @return False, jos sudoku ei ole oikein täytetty.
+     */
     public static boolean tarkistaOikeellisuus(Kentta kentta) {
         if (eiNollia(kentta)) {
             return sarakkeetOikein(kentta) && rivitOikein(kentta) && ruudutOikein(kentta);
@@ -59,7 +69,8 @@ public class Tarkistaja {
         return sisaltaaKaikkiNumerot(tarkistus);
     }
 
-    public static boolean kaikkiNumerotVaakarivilla(Kentta kentta, int y) {
+    
+    private static boolean kaikkiNumerotVaakarivilla(Kentta kentta, int y) {
         boolean[] tarkistus = new boolean[kentta.getKoko()];
         for (int x = 0; x < kentta.getKoko(); x++) {
             tarkistus[kentta.getArvo(y, x) - 1] = true;
@@ -68,7 +79,8 @@ public class Tarkistaja {
         return sisaltaaKaikkiNumerot(tarkistus);
     }
 
-    public static boolean kaikkiNumerotRuudukossa(Kentta kentta, int startY, int startX) {
+    
+    private static boolean kaikkiNumerotRuudukossa(Kentta kentta, int startY, int startX) {
         boolean[] tarkistus = new boolean[kentta.getKoko()];
 
         for (int y = startY; y < startY + 3; y++) {
@@ -88,6 +100,12 @@ public class Tarkistaja {
         return true;
     }
 
+    /**
+     * Validoi uuden kentän.
+     * 
+     * @param kentta
+     * @return false jos riveillä, sarakkeilla tai ruuduissa on samoja numeroita.
+     */
     public static boolean validoi(Kentta kentta) {
         if (!oikeatNumerot(kentta)) {
             return false;
@@ -95,7 +113,7 @@ public class Tarkistaja {
         return (riveillaEiDuplikaatteja(kentta) && sarakkeissaEiDuplikaatteja(kentta) && ruuduissaEiDuplikaatteja(kentta));
     }
 
-    public static boolean oikeatNumerot(Kentta kentta) {
+    private static boolean oikeatNumerot(Kentta kentta) {
         for (int y = 0; y < kentta.getKoko(); y++) {
             for (int x = 0; x < kentta.getKoko(); x++) {
                 int arvo = kentta.getArvo(y, x);
@@ -107,7 +125,8 @@ public class Tarkistaja {
         return true;
     }
 
-    public static boolean riveillaEiDuplikaatteja(Kentta kentta) {
+   
+    private static boolean riveillaEiDuplikaatteja(Kentta kentta) {
         for (int y = 0; y < kentta.getKoko(); y++) {
             int[] tarkistus = new int[kentta.getKoko()];
             for (int x = 0; x < kentta.getKoko(); x++) {

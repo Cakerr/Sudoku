@@ -13,6 +13,10 @@ import java.awt.event.KeyListener;
 import javax.swing.JButton;
 import sudoku.ui.Gui;
 
+/**
+ *
+ * @author ari
+ */
 public class NumeroPainike extends JButton {
 
     private boolean onkoValittu = false;
@@ -20,6 +24,13 @@ public class NumeroPainike extends JButton {
     private int y;
     private int x;
 
+    /**
+     *
+     * @param y
+     * @param x
+     * @param arvo
+     * @param ui
+     */
     public NumeroPainike(int y, int x, int arvo, Gui ui) {
         super();
         this.y = y;

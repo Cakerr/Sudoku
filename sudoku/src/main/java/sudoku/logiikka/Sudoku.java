@@ -3,40 +3,81 @@ package sudoku.logiikka;
 import sudoku.ui.Gui;
 import sudoku.ui.Ui;
 
+/**
+ *
+ * @author ari
+ */
 public class Sudoku {
 
     private Kentta kentta;
     private Ui ui;
 
+    /**
+     *Konstruktori, jokaa saa parametrina Kentta-olion ja käynnistää 
+     * graaffisen käyttöliittymän.
+     * @param kentta
+     */
     public Sudoku(Kentta kentta) {
         this.kentta = kentta;
         gui();
     }
 
+    /**
+     *Tarkistaa onko valmis sudoku täytetty oikein.
+     * @return false jos sudoku on väärin täytetty
+     */
     public boolean tarkista() {
         return Tarkistaja.tarkistaOikeellisuus(kentta);
     }
 
+    /**
+     * Asettaa kentän ruudun(y,x) arvoksi parametrina saadun arvon
+     * @param y y-koordinaatti
+     * @param x x-koordinaatti
+     * @param arvo 
+     */
     public void lisaaNumero(int y, int x, int arvo) {
         kentta.setArvo(y, x, arvo);
     }
 
+    /**
+     *
+     */
     public void gui() {
         ui = new Gui(this);
     }
 
+    /**
+     * Palauttaa kentän koon
+     * @return 
+     */
     public int getKoko() {
         return kentta.getKoko();
     }
 
+    /**
+     *
+     * @param y
+     * @param x
+     * @return
+     */
     public int getArvo(int y, int x) {
         return kentta.getArvo(y, x);
     }
 
+    /**
+     *
+     * @param y
+     * @param x
+     * @param arvo
+     */
     public void setArvo(int y, int x, int arvo) {
         kentta.setArvo(y, x, arvo);
     }
 
+    /**
+     *Luo uuden kentän, joka koostuu pelkistä 0:sta ja päivittää näkymän.
+     */
     public void uusiKentta() {
         int[][] uusi = new int[9][9];
         kentta.setKentta(uusi);
@@ -44,6 +85,10 @@ public class Sudoku {
         
     }
 
+    /**
+     * Validoi gui:n kauttaa luodun uuden kentän.
+     * @return false jos jollain rivillä, sarakkeella tai ruudulla esiintyy sama numero useaan kertaan.
+     */
     public boolean tarkistaUusiKentta() {
         return Tarkistaja.validoi(kentta);
     }

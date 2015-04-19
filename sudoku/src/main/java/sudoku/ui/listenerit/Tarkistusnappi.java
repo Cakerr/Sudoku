@@ -19,6 +19,10 @@ public class Tarkistusnappi extends JMenuItem {
 
     private Ui ui;
 
+    /**
+     *
+     * @param ui
+     */
     public Tarkistusnappi(Ui ui) {
         super("Tarkista");
         this.ui = ui;

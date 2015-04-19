@@ -197,61 +197,61 @@ public class TarkistajaTest {
     @Test
     public void KaikkiNumerotVaakarivillaPalauttaaTrue() {
         kentta.setKentta(toimivaKentta);
-        assertEquals(Tarkistaja.kaikkiNumerotVaakarivilla(kentta, 0), true);
+        assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), true);
     }
 
     @Test
     public void KaikkiNumerotVaakarivillaPalauttaafalse() {
         kentta.setKentta(eiToimivaKentta);
-        assertEquals(Tarkistaja.kaikkiNumerotVaakarivilla(kentta, 0), false);
+        assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), false);
     }
 
     @Test
     public void KaikkiNumerotVaakarivillaPalauttaaFalseJosDuplikaatteja() {
         kentta.setKentta(eiToimivaKentta);
-        assertEquals(Tarkistaja.kaikkiNumerotVaakarivilla(kentta, 0), false);
+        assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), false);
     }
 
     @Test
     public void riveillaEiDuplikaattejaPalauttaaTrue() {
         kentta.setKentta(toimivaKentta);
-        assertEquals(Tarkistaja.riveillaEiDuplikaatteja(kentta), true);
+        assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), true);
     }
 
     @Test
     public void riveillaEiDuplikaattejaPalauttaaFalse() {
         kentta.setKentta(eiToimivaKentta);
-        assertEquals(Tarkistaja.riveillaEiDuplikaatteja(kentta), false);
+        assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), false);
     }
 
     @Test
     public void kaikkiNumerotRuudukossaPalauttaaTrue() {
         kentta.setKentta(toimivaKentta);
-        assertEquals(Tarkistaja.kaikkiNumerotRuudukossa(kentta, 0, 0), true);
+        assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), true);
     }
 
     @Test
     public void kaikkiNumerotRuudukossaPalauttaaFalse() {
         kentta.setKentta(eiToimivaKentta);
-        assertEquals(Tarkistaja.kaikkiNumerotRuudukossa(kentta, 0, 0), false);
+        assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), false);
     }
 
     @Test
     public void oikeatNumerotPalauttaaFalseKunNegatiivisiaArvoja() {
         kentta.setKentta(eiToimivaKentta3);
-        assertEquals(Tarkistaja.oikeatNumerot(kentta), false);
+        assertEquals(Tarkistaja.validoi(kentta), false);
     }
 
     @Test
     public void oikeatNumerotPalauttaaTrue() {
         kentta.setKentta(toimivaKentta);
-        assertEquals(Tarkistaja.oikeatNumerot(kentta), true);
+        assertEquals(Tarkistaja.validoi(kentta), true);
     }
 
     @Test
     public void oikeatNumerotPalauttaaFalseKunLiianSuuriaArvoja() {
         kentta.setKentta(eiToimivaKentta4);
-        assertEquals(Tarkistaja.oikeatNumerot(kentta), false);
+        assertEquals(Tarkistaja.validoi(kentta), false);
     }
     
     @Test
