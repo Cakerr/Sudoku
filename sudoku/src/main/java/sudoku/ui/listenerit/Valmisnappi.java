@@ -30,6 +30,8 @@ public class Valmisnappi extends JMenuItem{
                
                 if(!Valmisnappi.this.ui.paivitaKentta()){
                     JOptionPane.showMessageDialog(null, "Numerot 1-9 voivat ilmetä vain kerran per sarake, rivi ja 3x3 ruutu.");
+                } else {
+                    Valmisnappi.this.setVisible(false);
                 }
             }
         });

@@ -29,7 +29,7 @@ public class Gui extends JFrame implements Ui {
     private JPanel tausta;
     private JLabel aika;
     private JMenuItem ratkaise;
-   
+
     private JButton kentta[][];
     private JPanel ruudukko[][];
     private JMenuBar menubar;
@@ -70,6 +70,7 @@ public class Gui extends JFrame implements Ui {
         generoi = new JMenuItem("Generoi");
         syota = new UusiKenttaPainike(this);
         uusi = new JMenu("Uusi");
+        valmisPainike = new Valmisnappi(this);
 
         asetaKomponentit();
         luoRuudukko();
@@ -79,6 +80,7 @@ public class Gui extends JFrame implements Ui {
         tausta.setLayout(new GridLayout(3, 3));
         tausta.setSize(600, 600);
         menubar.add(menu);
+        menubar.add(valmisPainike);
         setJMenuBar(menubar);
         menu.add(tarkista);
         menu.add(ratkaise);
@@ -126,13 +128,13 @@ public class Gui extends JFrame implements Ui {
     public void setArvo(int y, int x, int arvo) {
         sudoku.setArvo(y, x, arvo);
     }
-    
+
     /**
      *
      */
-    public void uusiKentta(){
+    public void uusiKentta() {
         sudoku.uusiKentta();
-        valmisPainike();
+        valmisPainike.setVisible(true);
     }
 
     /**
@@ -152,14 +154,17 @@ public class Gui extends JFrame implements Ui {
         for (int i = 0; i < kentta.length; i++) {
             for (int j = 0; j < kentta.length; j++) {
                 kentta[i][j].setText("" + sudoku.getArvo(i, j));
-                kentta[i][j].setEnabled(true);
+                if (sudoku.getArvo(i, j) > 0) {
+                    kentta[i][j].setEnabled(false);
+                } else {
+                     kentta[i][j].setEnabled(true);
+                }
             }
         }
     }
 
     private void valmisPainike() {
-        valmisPainike = new Valmisnappi(this);
-        menubar.add(valmisPainike);
+
     }
 
     /**
@@ -168,8 +173,7 @@ public class Gui extends JFrame implements Ui {
      */
     public boolean paivitaKentta() {
         return sudoku.tarkistaUusiKentta();
-        
+
     }
 
-  
 }

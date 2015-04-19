@@ -90,7 +90,11 @@ public class Sudoku {
      * @return false jos jollain rivillä, sarakkeella tai ruudulla esiintyy sama numero useaan kertaan.
      */
     public boolean tarkistaUusiKentta() {
-        return Tarkistaja.validoi(kentta);
+        if (Tarkistaja.validoi(kentta)){
+            ui.paivita();
+            return true;
+        }
+        return false;
     }
 
 }
