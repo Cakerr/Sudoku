@@ -1,6 +1,7 @@
 
 package sudoku.ui;
 
+import sudoku.logiikka.Kentta;
 import sudoku.logiikka.Sudoku;
 
 /**
@@ -19,5 +20,9 @@ public interface Ui {
      *
      */
     public void paivita();
+
+    public boolean ratkaise();
+
+    public void asetaTyhjaKentta();
     
 }

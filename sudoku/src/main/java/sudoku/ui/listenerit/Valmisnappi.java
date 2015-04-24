@@ -1,5 +1,3 @@
-
-
 package sudoku.ui.listenerit;
 
 import java.awt.event.ActionEvent;
@@ -13,7 +11,8 @@ import sudoku.ui.Ui;
  *
  * @author ari
  */
-public class Valmisnappi extends JMenuItem{
+public class Valmisnappi extends JMenuItem {
+
     private Gui ui;
 
     /**
@@ -21,14 +20,14 @@ public class Valmisnappi extends JMenuItem{
      * @param ui
      */
     public Valmisnappi(Gui ui) {
-        super("Valmis"); 
+        super("Valmis");
         this.ui = ui;
         addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent ae) {
-               
-                if(!Valmisnappi.this.ui.paivitaKentta()){
+
+                if (!Valmisnappi.this.ui.paivitaKentta()) {
                     JOptionPane.showMessageDialog(null, "Numerot 1-9 voivat ilmetä vain kerran per sarake, rivi ja 3x3 ruutu.");
                 } else {
                     Valmisnappi.this.setVisible(false);

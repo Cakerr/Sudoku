@@ -15,6 +15,7 @@ import javax.swing.*;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import sudoku.logiikka.Sudoku;
+import sudoku.ui.listenerit.Ratkaisenappi;
 import sudoku.ui.listenerit.Tarkistusnappi;
 import sudoku.ui.listenerit.UusiKenttaPainike;
 import sudoku.ui.listenerit.Valmisnappi;
@@ -66,7 +67,7 @@ public class Gui extends JFrame implements Ui {
         menubar = new JMenuBar();
         menu = new JMenu("Valikko");
         tarkista = new Tarkistusnappi(this);
-        ratkaise = new JMenuItem("Ratkaise");
+        ratkaise = new Ratkaisenappi(this);
         generoi = new JMenuItem("Generoi");
         syota = new UusiKenttaPainike(this);
         uusi = new JMenu("Uusi");
@@ -154,17 +155,13 @@ public class Gui extends JFrame implements Ui {
         for (int i = 0; i < kentta.length; i++) {
             for (int j = 0; j < kentta.length; j++) {
                 kentta[i][j].setText("" + sudoku.getArvo(i, j));
-                if (sudoku.getArvo(i, j) > 0) {
+                if (sudoku.getArvo( i, j) > 0) {
                     kentta[i][j].setEnabled(false);
                 } else {
-                     kentta[i][j].setEnabled(true);
+                    kentta[i][j].setEnabled(true);
                 }
             }
         }
-    }
-
-    private void valmisPainike() {
-
     }
 
     /**
@@ -174,6 +171,24 @@ public class Gui extends JFrame implements Ui {
     public boolean paivitaKentta() {
         return sudoku.tarkistaUusiKentta();
 
+    }
+
+    public boolean ratkaise() {
+        if (this.sudoku.ratkaise()) {
+            paivita();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void asetaUusiKentta() {
+
+    }
+
+    @Override
+    public void asetaTyhjaKentta() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

@@ -11,19 +11,24 @@ public class Sudoku {
 
     private Kentta kentta;
     private Ui ui;
+    private Solver solver;
+    private Kentta temp;
 
     /**
-     *Konstruktori, jokaa saa parametrina Kentta-olion ja käynnistää 
-     * graaffisen käyttöliittymän.
+     * Konstruktori, jokaa saa parametrina Kentta-olion ja käynnistää graaffisen
+     * käyttöliittymän.
+     *
      * @param kentta
      */
     public Sudoku(Kentta kentta) {
         this.kentta = kentta;
+        this.solver = new Solver();
         gui();
     }
 
     /**
-     *Tarkistaa onko valmis sudoku täytetty oikein.
+     * Tarkistaa onko valmis sudoku täytetty oikein.
+     *
      * @return false jos sudoku on väärin täytetty
      */
     public boolean tarkista() {
@@ -32,9 +37,10 @@ public class Sudoku {
 
     /**
      * Asettaa kentän ruudun(y,x) arvoksi parametrina saadun arvon
+     *
      * @param y y-koordinaatti
      * @param x x-koordinaatti
-     * @param arvo 
+     * @param arvo
      */
     public void lisaaNumero(int y, int x, int arvo) {
         kentta.setArvo(y, x, arvo);
@@ -49,7 +55,8 @@ public class Sudoku {
 
     /**
      * Palauttaa kentän koon
-     * @return 
+     *
+     * @return
      */
     public int getKoko() {
         return kentta.getKoko();
@@ -57,12 +64,13 @@ public class Sudoku {
 
     /**
      *
+     * @param uusi true, jos halutaan uuden kentän tiedot, muuten false.
      * @param y
      * @param x
      * @return
      */
-    public int getArvo(int y, int x) {
-        return kentta.getArvo(y, x);
+    public int getArvo( int y, int x) {
+            return kentta.getArvo(y, x);
     }
 
     /**
@@ -76,25 +84,39 @@ public class Sudoku {
     }
 
     /**
-     *Luo uuden kentän, joka koostuu pelkistä 0:sta ja päivittää näkymän.
+     * Luo uuden kentän, joka koostuu pelkistä 0:sta ja päivittää näkymän.
      */
     public void uusiKentta() {
         int[][] uusi = new int[9][9];
-        kentta.setKentta(uusi);
+        temp = new Kentta();
+        temp.setKentta(uusi);
+        swapKentat();
         ui.paivita();
-        
+    }
+    
+    private void swapKentat(){
+        Kentta swapTemp = kentta;
+        kentta = temp;
+        temp = swapTemp;
     }
 
     /**
      * Validoi gui:n kauttaa luodun uuden kentän.
-     * @return false jos jollain rivillä, sarakkeella tai ruudulla esiintyy sama numero useaan kertaan.
+     *
+     * @return false jos jollain rivillä, sarakkeella tai ruudulla esiintyy sama
+     * numero useaan kertaan.
      */
     public boolean tarkistaUusiKentta() {
-        if (Tarkistaja.validoi(kentta)){
+        if (Tarkistaja.validoi(temp)) {
             ui.paivita();
             return true;
         }
         return false;
+    }
+
+    public boolean ratkaise() {
+        solver.setKentta(kentta);
+        return solver.solve(0, 0);
     }
 
 }
