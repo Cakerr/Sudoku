@@ -27,7 +27,7 @@ public class Solver {
 
                     kentta.setArvo(y, x, kokeiltavaArvo);
 
-                    if (solve(y, x)) {
+                    if (solve(y, x+1)) {
                         return true;
                     } else {
                         kentta.setArvo(y, x, 0);
