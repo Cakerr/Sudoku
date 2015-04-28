@@ -5,7 +5,7 @@
  */
 package sudoku.ui;
 
-import sudoku.ui.listenerit.NumeroPainike;
+import sudoku.ui.listenerit.Numeropainike;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 import sudoku.logiikka.Sudoku;
 import sudoku.ui.listenerit.Ratkaisenappi;
 import sudoku.ui.listenerit.Tarkistusnappi;
-import sudoku.ui.listenerit.UusiKenttaPainike;
+import sudoku.ui.listenerit.UusiKenttapainike;
 import sudoku.ui.listenerit.Valmisnappi;
 
 /**
@@ -69,9 +69,10 @@ public class Gui extends JFrame implements Ui {
         tarkista = new Tarkistusnappi(this);
         ratkaise = new Ratkaisenappi(this);
         generoi = new JMenuItem("Generoi");
-        syota = new UusiKenttaPainike(this);
+        syota = new UusiKenttapainike(this);
         uusi = new JMenu("Uusi");
         valmisPainike = new Valmisnappi(this);
+        valmisPainike.setVisible(false);
 
         asetaKomponentit();
         luoRuudukko();
@@ -105,7 +106,7 @@ public class Gui extends JFrame implements Ui {
 
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                kentta[i][j] = new NumeroPainike(i, j, sudoku.getArvo(i, j), this);
+                kentta[i][j] = new Numeropainike(i, j, sudoku.getArvo(i, j), this);
                 kentta[i][j].setBorder(BorderFactory.createLineBorder(Color.black));
                 kentta[i][j].setHorizontalAlignment(JTextField.CENTER);
                 ruudukko[i / 3][j / 3].add(kentta[i][j]);
@@ -136,6 +137,7 @@ public class Gui extends JFrame implements Ui {
     public void uusiKentta() {
         sudoku.uusiKentta();
         valmisPainike.setVisible(true);
+        ratkaise.setVisible(false);
     }
 
     /**
@@ -155,7 +157,7 @@ public class Gui extends JFrame implements Ui {
         for (int i = 0; i < kentta.length; i++) {
             for (int j = 0; j < kentta.length; j++) {
                 kentta[i][j].setText("" + sudoku.getArvo(i, j));
-                if (sudoku.getArvo( i, j) > 0) {
+                if (sudoku.getArvo(i, j) > 0) {
                     kentta[i][j].setEnabled(false);
                 } else {
                     kentta[i][j].setEnabled(true);
@@ -169,7 +171,12 @@ public class Gui extends JFrame implements Ui {
      * @return
      */
     public boolean paivitaKentta() {
-        return sudoku.tarkistaUusiKentta();
+        if (sudoku.tarkistaUusiKentta()) {
+            ratkaise.setVisible(true);
+            return true;
+        } else {
+            return false;
+        }
 
     }
 

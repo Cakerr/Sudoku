@@ -17,7 +17,7 @@ import sudoku.ui.Gui;
  *
  * @author ari
  */
-public class NumeroPainike extends JButton {
+public class Numeropainike extends JButton {
 
     private boolean onkoValittu = false;
     private Gui ui;
@@ -31,7 +31,7 @@ public class NumeroPainike extends JButton {
      * @param arvo
      * @param ui
      */
-    public NumeroPainike(int y, int x, int arvo, Gui ui) {
+    public Numeropainike(int y, int x, int arvo, Gui ui) {
         super();
         this.y = y;
         this.x = x;
@@ -59,8 +59,8 @@ public class NumeroPainike extends JButton {
                 if (onkoValittu) {
                     int nappain = ke.getKeyCode();
                     if ((nappain >= 49 && nappain <= 57) || (nappain >= 97 && nappain <= 105)) {
-                        NumeroPainike.this.setText("" + ke.getKeyChar());
-                        NumeroPainike.this.ui.setArvo(NumeroPainike.this.y, NumeroPainike.this.x, Integer.parseInt("" + ke.getKeyChar()));
+                        Numeropainike.this.setText("" + ke.getKeyChar());
+                        Numeropainike.this.ui.setArvo(Numeropainike.this.y, Numeropainike.this.x, Integer.parseInt("" + ke.getKeyChar()));
                     } else {
 
                     }

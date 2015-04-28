@@ -107,7 +107,7 @@ public class Sudoku {
      * numero useaan kertaan.
      */
     public boolean tarkistaUusiKentta() {
-        if (Tarkistaja.validoi(temp)) {
+        if (Tarkistaja.validoi(kentta)) {
             ui.paivita();
             return true;
         }

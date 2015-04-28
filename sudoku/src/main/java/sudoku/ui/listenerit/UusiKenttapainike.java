@@ -12,14 +12,14 @@ import sudoku.ui.Ui;
  *
  * @author ari
  */
-public class UusiKenttaPainike extends JMenuItem{
+public class UusiKenttapainike extends JMenuItem{
     private Gui ui;
 
     /**
      *
      * @param ui
      */
-    public UusiKenttaPainike(Gui ui) {
+    public UusiKenttapainike(Gui ui) {
         super("Luo uusi sudoku");
         this.ui = ui;
         addActionListener(new ActionListener() {
@@ -27,8 +27,8 @@ public class UusiKenttaPainike extends JMenuItem{
             @Override
             public void actionPerformed(ActionEvent ae) {
                 
-                UusiKenttaPainike.this.ui.uusiKentta();
-                UusiKenttaPainike.this.ui.paivita();
+                UusiKenttapainike.this.ui.uusiKentta();
+                UusiKenttapainike.this.ui.paivita();
             }
         });
     }
