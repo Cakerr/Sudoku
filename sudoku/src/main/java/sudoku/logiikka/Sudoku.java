@@ -24,7 +24,6 @@ public class Sudoku {
     public Sudoku(Kentta kentta) {
         this.kentta = kentta;
         this.solver = new Solver();
-        gui();
         
         
     }

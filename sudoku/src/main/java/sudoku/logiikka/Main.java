@@ -36,6 +36,7 @@ public class Main {
         //kentta.setKentta(kentta);
         
         Sudoku sudoku = new Sudoku(kentta);
+        sudoku.gui();
     }
     
 }
