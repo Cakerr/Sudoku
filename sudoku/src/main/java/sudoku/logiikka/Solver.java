@@ -17,7 +17,7 @@ public class Solver {
         }
         //Jos arvo pisteessä (y,x) on jotain muuta kuin 0 hypätään seuraavaan soluun
         if (kentta.getArvo(y, x) != 0) {
-            return solve(y, x+1);
+            return solve(y, x + 1);
         } else {
             for (int kokeiltavaArvo = 1; kokeiltavaArvo <= kentta.getKoko(); kokeiltavaArvo++) {
 
@@ -27,7 +27,7 @@ public class Solver {
 
                     kentta.setArvo(y, x, kokeiltavaArvo);
 
-                    if (solve(y, x+1)) {
+                    if (solve(y, x + 1)) {
                         return true;
                     } else {
                         kentta.setArvo(y, x, 0);

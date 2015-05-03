@@ -23,6 +23,7 @@ public class Generoija {
         return uusi;
     }
 
+
     public void alustaKentta() {
         for (int i = 0; i < pohja.length; i++) {
             for (int j = 0; j < pohja[i].length; j++) {
@@ -36,8 +37,8 @@ public class Generoija {
     }
 
     private void sekoita() {
-        
-        for (int i = 0; i < 5000; i++) {
+
+        for (int i = 0; i < 500000; i++) {
             int rand = new Random().nextInt(6);
 
             //pyöritetään koko kenttää 90 astetta myötäpäivään
@@ -59,9 +60,9 @@ public class Generoija {
                 //jos rand < 2, niin tehdään swapataan rivi/sarake ruudukkorivin/sarakkeen sisällä
                 if (rand < 2) {
                     //etäisyys ruudun alusta 1. swapttavaan riviin/sarakkeesen
-                    int offset1 = new Random().nextInt(3);
+                    int etaisyys = new Random().nextInt(3);
                     //ensimmäinen swapattava rivi/sarake
-                    int vaihto1 = offset1 + swap1;
+                    int vaihto1 = etaisyys + swap1;
 
                     //etäisyys ensimmäisestä swapattavasta rivistä/ruudusta, 1 tai 2.
                     int swap2 = new Random().nextInt(2) + 1;
@@ -117,14 +118,14 @@ public class Generoija {
 
     public void ruutuRiviSwap(int y1, int x1, int y2, int x2) {
         for (int i = 0; i < 3; i++) {
-                riviSwap(y1+i, y2+i);
-        
+            riviSwap(y1 + i, y2 + i);
+
         }
     }
 
     public void ruutuSarakeSwap(int y1, int x1, int y2, int x2) {
         for (int j = 0; j < 3; j++) {
-            sarakeSwap(x1+j, x2+j);
+            sarakeSwap(x1 + j, x2 + j);
         }
 
     }
