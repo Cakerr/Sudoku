@@ -66,7 +66,6 @@ public class Sudoku {
 
     /**
      *
-     * @param uusi true, jos halutaan uuden kentän tiedot, muuten false.
      * @param y
      * @param x
      * @return
@@ -115,11 +114,18 @@ public class Sudoku {
         return false;
     }
 
+    /**
+     *  Käyttää Solver-luokkaa määritälläkseen onko sudokulla ratkaisua
+     * @return true jos on, muuten false
+     */
     public boolean ratkaise() {
         solver.setKentta(kentta);
         return solver.solve(0, 0);
     }
     
+    /**
+     *Generoi uuden sudokulaudan
+     */
     public void generoiUusiKentta(){
         Generoija gen = new Generoija();
         kentta = gen.generoi();

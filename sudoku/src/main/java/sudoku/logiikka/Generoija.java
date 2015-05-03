@@ -2,6 +2,10 @@ package sudoku.logiikka;
 
 import java.util.Random;
 
+/**
+ *
+ * @author ari
+ */
 public class Generoija {
 
     private Kentta uusi = new Kentta(9);
@@ -17,13 +21,19 @@ public class Generoija {
         {6, 7, 8, 9, 1, 2, 3, 4, 5},
         {9, 1, 2, 3, 4, 5, 6, 7, 8}};
 
+    /**
+     *Generoi uuden 9x9 sudokulaudan, metodit ovat publiceja testauksen helpottamiseksi. Ei toimi tällä hetkellä.
+     * @return palauttaa uuden sudokulaudan
+     */
     public Kentta generoi() {
         alustaKentta();
         sekoita();
         return uusi;
     }
 
-
+    /**
+     *Alustaa uuden pelilaudan
+     */
     public void alustaKentta() {
         for (int i = 0; i < pohja.length; i++) {
             for (int j = 0; j < pohja[i].length; j++) {
@@ -32,6 +42,10 @@ public class Generoija {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public Kentta getKentta() {
         return uusi;
     }
@@ -93,6 +107,11 @@ public class Generoija {
         }
     }
 
+    /**
+     *
+     * @param arvo1
+     * @param arvo2
+     */
     public void vaihdaNumerotKeskenaan(int arvo1, int arvo2) {
 
         for (int y = 0; y < 9; y++) {
@@ -116,6 +135,13 @@ public class Generoija {
         }
     }
 
+    /**
+     *
+     * @param y1
+     * @param x1
+     * @param y2
+     * @param x2
+     */
     public void ruutuRiviSwap(int y1, int x1, int y2, int x2) {
         for (int i = 0; i < 3; i++) {
             riviSwap(y1 + i, y2 + i);
@@ -123,6 +149,13 @@ public class Generoija {
         }
     }
 
+    /**
+     *
+     * @param y1
+     * @param x1
+     * @param y2
+     * @param x2
+     */
     public void ruutuSarakeSwap(int y1, int x1, int y2, int x2) {
         for (int j = 0; j < 3; j++) {
             sarakeSwap(x1 + j, x2 + j);
@@ -130,12 +163,22 @@ public class Generoija {
 
     }
 
+    /**
+     *
+     * @param y1
+     * @param y2
+     */
     public void riviSwap(int y1, int y2) {
         for (int x = 0; x < 9; x++) {
             swap(y1, x, y2, x);
         }
     }
 
+    /**
+     *
+     * @param x1
+     * @param x2
+     */
     public void sarakeSwap(int x1, int x2) {
         for (int y = 0; y < 9; y++) {
             swap(y, x1, y, x2);
@@ -149,6 +192,9 @@ public class Generoija {
         uusi.setArvo(y2, x2, temp);
     }
 
+    /**
+     *
+     */
     public void gridRolling() {
         int[][] temp = new int[9][9];
         int x = 0;

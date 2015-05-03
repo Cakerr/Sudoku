@@ -10,6 +10,10 @@ public class Kentta {
     private Solu[][] kentta;
     private int koko;
 
+    /**
+     *
+     * @param koko
+     */
     public Kentta(int koko) {
         this.koko = koko;
         kentta = new Solu[koko][koko];
