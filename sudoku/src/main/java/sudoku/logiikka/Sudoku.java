@@ -3,6 +3,7 @@ package sudoku.logiikka;
 import sudoku.ui.Gui;
 import sudoku.ui.Ui;
 
+
 /**
  *
  * @author ari
@@ -24,6 +25,8 @@ public class Sudoku {
         this.kentta = kentta;
         this.solver = new Solver();
         gui();
+        
+        
     }
 
     /**
@@ -69,8 +72,8 @@ public class Sudoku {
      * @param x
      * @return
      */
-    public int getArvo( int y, int x) {
-            return kentta.getArvo(y, x);
+    public int getArvo(int y, int x) {
+        return kentta.getArvo(y, x);
     }
 
     /**
@@ -87,14 +90,13 @@ public class Sudoku {
      * Luo uuden kentän, joka koostuu pelkistä 0:sta ja päivittää näkymän.
      */
     public void uusiKentta() {
-        int[][] uusi = new int[9][9];
-        temp = new Kentta();
-        temp.setKentta(uusi);
+        Kentta uusi = new Kentta(9);
+        temp = new Kentta(9);
         swapKentat();
         ui.paivita();
     }
-    
-    private void swapKentat(){
+
+    private void swapKentat() {
         Kentta swapTemp = kentta;
         kentta = temp;
         temp = swapTemp;
@@ -117,6 +119,12 @@ public class Sudoku {
     public boolean ratkaise() {
         solver.setKentta(kentta);
         return solver.solve(0, 0);
+    }
+    
+    public void generoiUusiKentta(){
+        Generoija gen = new Generoija();
+        kentta = gen.generoi();
+        ui.paivita();
     }
 
 }

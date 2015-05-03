@@ -24,5 +24,7 @@ public interface Ui {
     public boolean ratkaise();
 
     public void asetaTyhjaKentta();
+
+    public void generoi();
     
 }

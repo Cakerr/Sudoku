@@ -1,30 +1,39 @@
 package sudoku.logiikka;
 
-import java.util.ArrayList;
-
 /**
- *Luokka kapseloi sudokulaudan toteutuksen.
+ * Luokka kapseloi sudokulaudan toteutuksen.
+ *
  * @author ari
  */
 public class Kentta {
 
-    private int[][] kentta;
+    private Solu[][] kentta;
     private int koko;
 
-    /**
-     *Metodi asettaa syotteenä saadun kentän.
-     * @param kentta Syotteenä saatava sudokukentta 
-     * @return palauttaa false jos syötteenä saatu kenttä ei ole validi
-     */
-    public boolean setKentta(int[][] kentta) {
-        this.kentta = kentta;
-        this.koko = kentta[0].length;
-        if (Tarkistaja.validoi(this)) {
-            return true;
+    public Kentta(int koko) {
+        this.koko = koko;
+        kentta = new Solu[koko][koko];
+        for (int y = 0; y < koko; y++) {
+            for (int x = 0; x < koko; x++) {
+                kentta[y][x] = new Solu(0);
+            }
         }
-        return false;
     }
 
+    /**
+     * Metodi asettaa syotteenä saadun kentän.
+     *
+     * @param kentta Syotteenä saatava sudokukentta
+     * @return palauttaa false jos syötteenä saatu kenttä ei ole validi
+     */
+//    public boolean setKentta(int[][] kentta) {
+//        this.kentta = kentta;
+//        this.koko = kentta[0].length;
+//        if (Tarkistaja.validoi(this)) {
+//            return true;
+//        }
+//        return false;
+//    }
     /**
      *
      * @param y
@@ -32,7 +41,7 @@ public class Kentta {
      * @return
      */
     public int getArvo(int y, int x) {
-        return kentta[y][x];
+        return kentta[y][x].getArvo();
     }
 
     /**
@@ -44,7 +53,7 @@ public class Kentta {
     }
 
     void setArvo(int y, int x, int arvo) {
-        kentta[y][x] = arvo;
+        kentta[y][x].setArvo(arvo);
     }
 
 }

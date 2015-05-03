@@ -164,10 +164,10 @@ public class Tarkistaja {
                 int[] tarkistus = new int[kentta.getKoko()];
                 for (int i = 0; i < 3; i++) {
                     for (int j = 0; j < 3; j++) {
-                        if (kentta.getArvo(i, j) < 1) {
+                        if (kentta.getArvo(y+i, x+j) < 1) {
                             continue;
                         }
-                        if (++tarkistus[kentta.getArvo(i, j) - 1] > 1) {
+                        if (++tarkistus[kentta.getArvo(y+i, x+j) - 1] > 1) {
                             return false;
                         }
                     }

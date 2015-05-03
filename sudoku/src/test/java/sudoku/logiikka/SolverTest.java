@@ -18,9 +18,10 @@ import static org.junit.Assert.*;
  */
 public class SolverTest {
 
-    private Kentta kentta = new Kentta();
+    private Kentta kentta = new Kentta(9);
     private Solver solver;
     private int[][] solverTest1, solverTest1Answ;
+    private Sudoku sudoku;
 
     public SolverTest() {
     }
@@ -68,11 +69,21 @@ public class SolverTest {
             {6, 1, 7, 4, 2, 8, 9, 5, 3},
             {5, 9, 4, 6, 3, 1, 8, 7, 2},
             {8, 3, 2, 5, 9, 7, 4, 6, 1}};
-
-        kentta.setKentta(toimivaKentta);
+        
+        luoKenttTaulukosta(toimivaKentta);
+        sudoku = new Sudoku(kentta);
         solver = new Solver();
         solver.setKentta(kentta);
 
+    }
+    
+    public void luoKenttTaulukosta(int[][] taulukko){
+        
+        for (int i = 0; i < taulukko.length; i++){
+            for (int j = 0; j < taulukko[i].length; j++){
+                kentta.setArvo(i, j, taulukko[i][j]);
+            }
+        }   
     }
 
     @After
@@ -130,13 +141,14 @@ public class SolverTest {
 
     @Test
     public void solverPalauttaaTrueKunSudokunVoiRatkaista() {
-        kentta.setKentta(solverTest1);
+        
+        luoKenttTaulukosta(solverTest1);
         assertEquals(solver.solve(0, 0), true);
     }
 
     @Test
     public void solverLuoOikeanRatkaisun() {
-        kentta.setKentta(solverTest1);
+        luoKenttTaulukosta(solverTest1);
         solver.solve(0, 0);
         for (int y = 0; y < kentta.getKoko(); y++) {
             for (int x = 0; x < kentta.getKoko(); x++) {

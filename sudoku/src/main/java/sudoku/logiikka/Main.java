@@ -26,8 +26,14 @@ public class Main {
             {5, 0, 4, 0, 3, 0, 0, 7, 2},
             {0, 0, 0, 5, 0, 0, 0, 0, 0}};
         
-        Kentta kentta = new Kentta();
-        kentta.setKentta(k);
+        Kentta kentta = new Kentta(9);
+        for (int y = 0; y < 9; y++){
+            for (int x = 0; x < 9; x++){
+                kentta.setArvo(y, x, k[y][x]);
+            }
+        }
+
+        //kentta.setKentta(kentta);
         
         Sudoku sudoku = new Sudoku(kentta);
     }

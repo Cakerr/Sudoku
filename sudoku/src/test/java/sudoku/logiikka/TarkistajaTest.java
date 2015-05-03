@@ -26,7 +26,8 @@ public class TarkistajaTest {
     private int[][] eiToimivaKentta4;
     private int[][] eiToimivaKentta5;
     private int[][] eiToimivaKentta6;
-    private Kentta kentta = new Kentta();
+    private Kentta kentta = new Kentta(9);
+    Sudoku sudoku = new Sudoku(kentta);
 
     public TarkistajaTest() {
     }
@@ -117,7 +118,7 @@ public class TarkistajaTest {
             {3, 4, 5, 6, 7, 8, 9, 1, 2},
             {6, 7, 8, 9, 1, 2, 3, 4, 5},
             {9, 1, 2, 3, 4, 5, 6, 7, 8}};
-        
+
         validointiEiOnnistu = new int[][]{
             {0, 1, 1, 4, 5, 6, 7, 8, 9},
             {4, 5, 6, 7, 8, 9, 1, 2, 3},
@@ -128,7 +129,7 @@ public class TarkistajaTest {
             {3, 4, 5, 6, 7, 8, 9, 1, 2},
             {6, 7, 8, 9, 1, 2, 3, 4, 5},
             {9, 1, 2, 3, 4, 5, 6, 7, 8}};
-        
+
         validointiEiOnnistu2 = new int[][]{
             {0, 1, 3, 4, 5, 6, 7, 8, 9},
             {4, 5, 6, 7, 8, 9, 1, 2, 3},
@@ -139,7 +140,7 @@ public class TarkistajaTest {
             {3, 4, 5, 6, 7, 8, 9, 1, 2},
             {6, 7, 8, 9, 1, 2, 3, 4, 5},
             {9, 1, 2, 3, 4, 5, 6, 7, 8}};
-        
+
         validointiEiOnnistu3 = new int[][]{
             {1, 2, 3, 4, 5, 6, 7, 8, 9},
             {4, 5, 6, 7, 8, 9, 1, 2, 3},
@@ -150,8 +151,7 @@ public class TarkistajaTest {
             {3, 4, 5, 6, 7, 8, 9, 1, 2},
             {6, 7, 8, 9, 1, 2, 3, 4, 5},
             {9, 1, 2, 3, 4, 5, 6, 7, 8}};
-        
-        
+
         validointiOnnistuu = new int[][]{
             {0, 0, 3, 4, 5, 6, 7, 8, 9},
             {4, 5, 6, 7, 8, 9, 1, 2, 3},
@@ -162,7 +162,7 @@ public class TarkistajaTest {
             {3, 4, 5, 6, 7, 8, 9, 1, 2},
             {6, 7, 8, 9, 1, 2, 3, 4, 5},
             {9, 1, 2, 3, 4, 5, 6, 7, 8}};
-        
+
         validointiOnnistuu2 = new int[][]{
             {0, 0, 3, 4, 5, 6, 7, 8, 9},
             {4, 5, 6, 7, 8, 9, 1, 2, 3},
@@ -173,7 +173,7 @@ public class TarkistajaTest {
             {3, 4, 5, 6, 7, 8, 9, 1, 2},
             {6, 7, 8, 9, 1, 2, 3, 4, 5},
             {0, 1, 2, 3, 4, 5, 6, 7, 8}};
-        
+
         validointiOnnistuu3 = new int[][]{
             {0, 2, 3, 4, 5, 6, 7, 8, 9},
             {4, 5, 6, 7, 8, 9, 1, 2, 3},
@@ -185,9 +185,17 @@ public class TarkistajaTest {
             {6, 7, 8, 9, 1, 2, 3, 4, 5},
             {9, 1, 2, 3, 4, 5, 6, 7, 8}};
 
+        Kentta kentta = new Kentta(9);
 
-        Kentta kentta = new Kentta();
+    }
 
+    public void luoKenttTaulukosta(int[][] taulukko) {
+
+        for (int i = 0; i < taulukko.length; i++) {
+            for (int j = 0; j < taulukko[i].length; j++) {
+                kentta.setArvo(i, j, taulukko[i][j]);
+            }
+        }
     }
 
     @After
@@ -196,121 +204,127 @@ public class TarkistajaTest {
 
     @Test
     public void KaikkiNumerotVaakarivillaPalauttaaTrue() {
-        kentta.setKentta(toimivaKentta);
+        luoKenttTaulukosta(toimivaKentta);
         assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), true);
     }
 
     @Test
     public void KaikkiNumerotVaakarivillaPalauttaafalse() {
-        kentta.setKentta(eiToimivaKentta);
+        luoKenttTaulukosta(eiToimivaKentta);
         assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), false);
     }
 
     @Test
     public void KaikkiNumerotVaakarivillaPalauttaaFalseJosDuplikaatteja() {
-        kentta.setKentta(eiToimivaKentta);
+        luoKenttTaulukosta(eiToimivaKentta);
         assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), false);
     }
 
     @Test
     public void riveillaEiDuplikaattejaPalauttaaTrue() {
-        kentta.setKentta(toimivaKentta);
+        luoKenttTaulukosta(toimivaKentta);
         assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), true);
     }
 
     @Test
     public void riveillaEiDuplikaattejaPalauttaaFalse() {
-        kentta.setKentta(eiToimivaKentta);
+        luoKenttTaulukosta(eiToimivaKentta);
         assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), false);
     }
 
     @Test
     public void kaikkiNumerotRuudukossaPalauttaaTrue() {
-        kentta.setKentta(toimivaKentta);
+        luoKenttTaulukosta(toimivaKentta);
         assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), true);
     }
 
     @Test
     public void kaikkiNumerotRuudukossaPalauttaaFalse() {
-        kentta.setKentta(eiToimivaKentta);
+        luoKenttTaulukosta(eiToimivaKentta);
         assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), false);
     }
 
     @Test
     public void oikeatNumerotPalauttaaFalseKunNegatiivisiaArvoja() {
-        kentta.setKentta(eiToimivaKentta3);
+        luoKenttTaulukosta(eiToimivaKentta3);
         assertEquals(Tarkistaja.validoi(kentta), false);
     }
 
     @Test
     public void oikeatNumerotPalauttaaTrue() {
-        kentta.setKentta(toimivaKentta);
+        luoKenttTaulukosta(toimivaKentta);
         assertEquals(Tarkistaja.validoi(kentta), true);
     }
 
     @Test
     public void oikeatNumerotPalauttaaFalseKunLiianSuuriaArvoja() {
-        kentta.setKentta(eiToimivaKentta4);
+        luoKenttTaulukosta(eiToimivaKentta4);
         assertEquals(Tarkistaja.validoi(kentta), false);
     }
-    
+
     @Test
-    public void validointiEiOnnistuKunRivillä2samaaNumeroa(){
-        assertEquals(kentta.setKentta(validointiEiOnnistu), false);
+    public void validointiEiOnnistuKunRivillä2samaaNumeroa() {
+        luoKenttTaulukosta(validointiEiOnnistu);
+        assertEquals(Tarkistaja.validoi(kentta), false);
     }
-    
+
     @Test
-    public void validointiEiOnnistuKunSarakkeessa2samaaNumeroa(){
-        assertEquals(kentta.setKentta(validointiEiOnnistu2), false);
+    public void validointiEiOnnistuKunSarakkeessa2samaaNumeroa() {
+        luoKenttTaulukosta(validointiEiOnnistu2);
+        assertEquals(Tarkistaja.validoi(kentta), false);
     }
-    
+
     @Test
-    public void validointiEiOnnistuKunRuudussa2samaaNumeroa(){
-        assertEquals(kentta.setKentta(validointiEiOnnistu3), false);
+    public void validointiEiOnnistuKunRuudussa2samaaNumeroa() {
+        luoKenttTaulukosta(validointiEiOnnistu3);
+        assertEquals(Tarkistaja.validoi(kentta), false);
     }
-    
+
     @Test
-    public void validointiOnnistuKunRivillä2Nollaa(){
-        assertEquals(kentta.setKentta(validointiOnnistuu), true);
+    public void validointiOnnistuKunRivillä2Nollaa() {
+        luoKenttTaulukosta(validointiOnnistuu);
+        assertEquals(Tarkistaja.validoi(kentta), true);
     }
-    
-     @Test
-    public void validointiOnnistuKunSarakkeessa2Nollaa(){
-        assertEquals(kentta.setKentta(validointiOnnistuu2), true);
-    }
-    
+
     @Test
-    public void validointiOnnistuKunRuudussa2Nollaa(){
-        assertEquals(kentta.setKentta(validointiOnnistuu3), true);
+    public void validointiOnnistuKunSarakkeessa2Nollaa() {
+        luoKenttTaulukosta(validointiOnnistuu2);
+        assertEquals(Tarkistaja.validoi(kentta), true);
     }
-    
+
     @Test
-    public void eiNolliaPalauttaaFalseKunNollia(){
-        kentta.setKentta(validointiOnnistuu);
+    public void validointiOnnistuKunRuudussa2Nollaa() {
+        luoKenttTaulukosta(validointiOnnistuu3);
+        assertEquals(Tarkistaja.validoi(kentta), true);
+    }
+
+    @Test
+    public void eiNolliaPalauttaaFalseKunNollia() {
+        luoKenttTaulukosta(validointiOnnistuu);
         assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), false);
     }
-    
+
     @Test
-    public void tarkistaOikeellisuusPalauttaaTrueKunOikeinTäytettyKentta(){
-        kentta.setKentta(toimivaKentta);
+    public void tarkistaOikeellisuusPalauttaaTrueKunOikeinTäytettyKentta() {
+        luoKenttTaulukosta(toimivaKentta);
         assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), true);
     }
-    
+
     @Test
-    public void tarkistaOikeellisuusPalauttaaFalseKunRivillaDuplikaatteja(){
-        kentta.setKentta(eiToimivaKentta);
+    public void tarkistaOikeellisuusPalauttaaFalseKunRivillaDuplikaatteja() {
+        luoKenttTaulukosta(eiToimivaKentta);
         assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), false);
     }
-    
-     @Test
-    public void tarkistaOikeellisuusPalauttaaFalseKunSarakkeessaDuplikaatteja(){
-        kentta.setKentta(eiToimivaKentta2);
+
+    @Test
+    public void tarkistaOikeellisuusPalauttaaFalseKunSarakkeessaDuplikaatteja() {
+        luoKenttTaulukosta(eiToimivaKentta2);
         assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), false);
     }
-    
-     @Test
-    public void tarkistaOikeellisuusPalauttaaFalseKunRuudussaDuplikaatteja(){
-        kentta.setKentta(eiToimivaKentta2);
+
+    @Test
+    public void tarkistaOikeellisuusPalauttaaFalseKunRuudussaDuplikaatteja() {
+        luoKenttTaulukosta(eiToimivaKentta2);
         assertEquals(Tarkistaja.tarkistaOikeellisuus(kentta), false);
     }
 
